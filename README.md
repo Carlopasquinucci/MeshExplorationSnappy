@@ -12,6 +12,6 @@ You can choose betwenn
 
 -dakota dakota_case.in
 
--dakota -i dakota.case.in -o out out.out
+-dakota -i dakota_case.in -o out out.out
 
 -dakota dakota_case.in | tee out.out
