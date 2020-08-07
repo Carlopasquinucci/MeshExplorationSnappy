@@ -1,0 +1,1 @@
+It will perform an exploration on the number of layers, finalLayerThickens and expansionFactor on the snappyHexMesh to calculate the influence of this number on the % of boundary layers created on 5 patches

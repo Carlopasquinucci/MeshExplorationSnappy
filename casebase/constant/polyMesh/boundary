@@ -1,0 +1,92 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2006                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       polyBoundaryMesh;
+    location    "constant/polyMesh";
+    object      boundary;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+10
+(
+    minX
+    {
+        type            wall;
+        inGroups        1(wall);
+        nFaces          200;
+        startFace       1745422;
+    }
+    maxX
+    {
+        type            wall;
+        inGroups        1(wall);
+        nFaces          200;
+        startFace       1745622;
+    }
+    minY
+    {
+        type            wall;
+        inGroups        1(wall);
+        nFaces          750;
+        startFace       1745822;
+    }
+    maxY
+    {
+        type            wall;
+        inGroups        1(wall);
+        nFaces          750;
+        startFace       1746572;
+    }
+    minZ
+    {
+        type            wall;
+        inGroups        1(wall);
+        nFaces          8452;
+        startFace       1747322;
+    }
+    maxZ
+    {
+        type            wall;
+        inGroups        1(wall);
+        nFaces          1500;
+        startFace       1755774;
+    }
+    body
+    {
+        type            wall;
+        inGroups        2(AhmedGroup wall);
+        nFaces          31768;
+        startFace       1757274;
+    }
+    head
+    {
+        type            wall;
+        inGroups        2(AhmedGroup wall);
+        nFaces          4356;
+        startFace       1789042;
+    }
+    leg
+    {
+        type            wall;
+        inGroups        2(AhmedGroup wall);
+        nFaces          640;
+        startFace       1793398;
+    }
+    slant
+    {
+        type            wall;
+        inGroups        2(AhmedGroup wall);
+        nFaces          1798;
+        startFace       1794038;
+    }
+)
+
+// ************************************************************************* //

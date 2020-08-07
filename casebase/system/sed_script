@@ -1,0 +1,6 @@
+sed -i 's/minX/inlet/g' constant/polyMesh/boundary
+sed -i 's/maxX/outlet/g' constant/polyMesh/boundary
+sed -i 's/minY/side1/g' constant/polyMesh/boundary
+sed -i 's/maxY/side2/g' constant/polyMesh/boundary
+sed -i 's/minZ/ground/g' constant/polyMesh/boundary
+sed -i 's/maxZ/top/g' constant/polyMesh/boundary

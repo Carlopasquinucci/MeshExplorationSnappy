@@ -1,0 +1,90 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  7
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      binary;
+    class       polyBoundaryMesh;
+    location    "constant/polyMesh";
+    object      boundary;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+10
+(
+    body
+    {
+        type            wall;
+        inGroups        List<word> 1(AhmedGroup);
+        nFaces          23139;
+        startFace       3696473;
+    }
+    head
+    {
+        type            wall;
+        inGroups        List<word> 1(AhmedGroup);
+        nFaces          6680;
+        startFace       3719612;
+    }
+    leg
+    {
+        type            wall;
+        inGroups        List<word> 1(AhmedGroup);
+        nFaces          1128;
+        startFace       3726292;
+    }
+    slant
+    {
+        type            wall;
+        inGroups        List<word> 1(AhmedGroup);
+        nFaces          1959;
+        startFace       3727420;
+    }
+    inlet
+    {
+        type            patch;
+        nFaces          280;
+        startFace       3729379;
+    }
+    outlet
+    {
+        type            patch;
+        nFaces          280;
+        startFace       3729659;
+    }
+    side1
+    {
+        type            symmetry;
+        inGroups        List<word> 1(symmetry);
+        nFaces          1050;
+        startFace       3729939;
+    }
+    side2
+    {
+        type            symmetry;
+        inGroups        List<word> 1(symmetry);
+        nFaces          1050;
+        startFace       3730989;
+    }
+    ground
+    {
+        type            wall;
+        inGroups        List<word> 1(wall);
+        nFaces          20503;
+        startFace       3732039;
+    }
+    top
+    {
+        type            symmetry;
+        inGroups        List<word> 1(symmetry);
+        nFaces          1500;
+        startFace       3752542;
+    }
+)
+
+// ************************************************************************* //

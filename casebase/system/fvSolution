@@ -1,0 +1,135 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  7                                     |
+|   \\  /    A nd           | Web:      www.OpenFOAM.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      fvSolution;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+solvers
+{
+
+    p
+    {
+/*
+        solver          PCG;
+        preconditioner  DIC;
+        tolerance       1e-06;
+        relTol          0.01;
+*/
+
+
+        solver           GAMG;
+        tolerance        1e-6;
+        relTol           0.01;
+        smoother         GaussSeidel;
+        nPreSweeps       0;
+        nPostSweeps      2;
+        cacheAgglomeration on;
+        agglomerator     faceAreaPair;
+        nCellsInCoarsestLevel 100;
+        mergeLevels      1;
+	minIter 	 2;
+
+
+    }
+
+
+    U
+    {
+        solver          PBiCGStab;
+        preconditioner  DILU;
+        tolerance       1e-08;
+        relTol          0.001;
+    }
+
+    k
+    {
+        solver          PBiCGStab;
+        preconditioner  DILU;
+        tolerance       1e-08;
+        relTol          0.001;
+    }
+
+    omega
+    {
+        solver          PBiCGStab;
+        preconditioner  DILU;
+        tolerance       1e-08;
+        relTol          0.001;
+    }
+
+    Phi
+    {
+        $p;
+    }
+}
+
+SIMPLE
+{
+    nNonOrthogonalCorrectors 3;		//3 starts - 2 later
+    pRefCell        0;
+    pRefValue       0;
+
+    consistent yes;
+
+    residualControl
+    {
+        p               1e-4;
+        U               1e-4;
+        nuTilda         1e-4;
+        k               1e-4;
+        omega           1e-4;
+    }
+}
+
+potentialFlow
+{
+    nNonOrthogonalCorrectors 10;
+}
+
+/*
+relaxationFactors
+{
+    fields
+    {
+        p               0.3;
+    }
+    equations
+    {
+        U               0.7;
+        k               0.7;
+        omega           0.7;
+    }
+}
+*/
+
+relaxationFactors
+{
+    fields
+    {
+        p               0.7;
+    }
+    equations
+    {
+        p               0.7;
+        U               0.7;
+        k               0.7;
+        omega           0.7;
+    }
+}
+
+cache
+{
+    grad(U);
+}
+
+// ************************************************************************* //

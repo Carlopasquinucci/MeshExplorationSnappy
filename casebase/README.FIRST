@@ -1,0 +1,84 @@
+#How to run me:
+
+
+
+#To clean the directory, this is optional
+
+foamCleanTutorials
+
+rm -rf 0
+
+
+
+#Extract and convert edges
+
+surfaceFeatureExtract -dict system/surfaceFeatureExtractDict
+
+#surfaceFeatureConvert geo_ahmed/edge1.vtk constant/triSurface/edge1.eMesh
+
+#cp constant/triSurface/edge2.eMesh.org constant/triSurface/edge2.eMesh
+
+
+
+#To generate the mesh and check mesh quality.
+
+blockMesh
+
+decomposePar 
+
+#mpirun -np 4 snappyHexMesh -parallel | tee log.snappy
+mpirun -np 4 snappyHexMesh -parallel -overwrite| tee log.snappy
+
+mpirun -np 4 checkMesh -parallel 
+
+
+
+#To visualize the decomposed mesh
+
+#paraFoam -builtin
+
+
+
+#To reconstruct the mesh
+
+reconstructParMesh -latestTime
+
+
+
+#To transfer the desired mesh to constant/polyMesh
+
+#rm -rf constant/polyMesh/
+
+#cp -r 3/polyMesh/ constant/
+
+#foamListTimes -rm
+
+#rm -rf processor*
+
+#createPatch -overwrite
+
+
+
+#To run in parallel:
+
+createPatch -overwrite
+
+cp -r 0_org 0
+
+decomposePar -force
+
+#mpirun -np 4 renumberMesh -overwrite -parallel
+
+mpirun -np 4 potentialFoam -initialiseUBCs -noFunctionObjects -parallel | tee log.potential
+
+mpirun -np 4 simpleFoam -parallel | tee log.simplefoam
+
+#simpleFoam -postProcess -func yPlus -latestTime
+
+#simpleFoam -postProcess -func wallShearStress -latestTime
+
+mpirun -np 4 postProcess -func Q -parallel -latestTime
+
+mpirun -np 4 postProcess -func vorticity -parallel -latestTime
+
+mpirun -np 4 postProcess -func sample -parallel -latestTime 
